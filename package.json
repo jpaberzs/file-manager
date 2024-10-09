@@ -1,0 +1,25 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node index.js --username=jpaberzs"
+  },
+  "author": "Janis Paberzs",
+  "license": "ISC",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "nodejs",
+    "assignments",
+    "file-manager",
+    "jpaberzs"
+  ]
+}
