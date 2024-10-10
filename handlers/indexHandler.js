@@ -1,8 +1,7 @@
 // import { CONSTANTS } from "../constants.js";
 
-import { dedicateFolderHandler } from "./dedicateFolderHandler.js";
-import { readDirHandler } from "./readDirHandler.js";
-import { upDirectoryHandler } from "./upDirectoryHandler.js";
+import { dedicateFolderHandler, readDirHandler, upDirectoryHandler } from "./navigation/index.js";
+import { readFileHandler } from "./files/index.js";
 
 export const indexHandler = async (line, readline) => {
   const [command, ...args] = line.trim().split(/\s+/g);
@@ -16,6 +15,9 @@ export const indexHandler = async (line, readline) => {
       break;
     case "ls":
       await readDirHandler();
+      break;
+    case "cat":
+      await readFileHandler(args[0] || "");
       break;
     case "help":
       console.log("Available commands: up, help, and .exit");
