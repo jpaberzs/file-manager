@@ -3,7 +3,6 @@ import { stdin as input, stdout as output, cwd } from "node:process";
 import { homedir } from "os";
 
 import { getUsername } from "./utils/getUsername.js";
-
 import { indexHandler } from "./handlers/indexHandler.js";
 
 import { styleText } from "node:util";

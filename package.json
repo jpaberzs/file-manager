@@ -7,7 +7,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "start": "node index.js --username=jpaberzs"
+    "start": "node index.js -- --username=jpaberzs"
   },
   "author": "Janis Paberzs",
   "license": "ISC",

@@ -9,7 +9,7 @@ export const dedicateFolderHandler = async (arg) => {
       .then(() => true)
       .catch(() => false);
 
-    if (isAccesed) return process.chdir(arg ? destination : process.cwd());
+    if (isAccesed) return process.chdir(destination);
 
     console.error("Operation failed: Please check path directory");
     return;

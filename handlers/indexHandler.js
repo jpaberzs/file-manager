@@ -1,6 +1,7 @@
 // import { CONSTANTS } from "../constants.js";
 
 import { dedicateFolderHandler } from "./dedicateFolderHandler.js";
+import { readDirHandler } from "./readDirHandler.js";
 import { upDirectoryHandler } from "./upDirectoryHandler.js";
 
 export const indexHandler = async (line, readline) => {
@@ -12,6 +13,9 @@ export const indexHandler = async (line, readline) => {
       break;
     case "cd":
       await dedicateFolderHandler(args[0] || "");
+      break;
+    case "ls":
+      await readDirHandler();
       break;
     case "help":
       console.log("Available commands: up, help, and .exit");

@@ -15,6 +15,7 @@ export const upDirectoryHandler = async () => {
     } else {
       console.log("Already at root, no change in directory.");
     }
+    return;
   } catch (err) {
     throw new Error(err);
   }
