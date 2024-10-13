@@ -4,7 +4,9 @@ import { dedicateFolderHandler, readDirHandler, upDirectoryHandler } from "./nav
 import {
   addFileHandler,
   copyFileHandler,
+  moveFileHandler,
   readFileHandler,
+  removeFileHandler,
   renameFileHandler,
 } from "./files/index.js";
 
@@ -32,6 +34,12 @@ export const indexHandler = async (line, readline) => {
       break;
     case "cp":
       await copyFileHandler(...(args || ""));
+      break;
+    case "mv":
+      await moveFileHandler(...(args || ""));
+      break;
+    case "rm":
+      await removeFileHandler(args[0]);
       break;
     case "help":
       console.log("Available commands: up, help, and .exit");
