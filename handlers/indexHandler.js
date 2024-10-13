@@ -9,6 +9,7 @@ import {
   removeFileHandler,
   renameFileHandler,
 } from "./files/index.js";
+import { osHandler } from "./os/index.js";
 
 export const indexHandler = async (line, readline) => {
   const [command, ...args] = line.trim().split(/\s+/g);
@@ -40,6 +41,9 @@ export const indexHandler = async (line, readline) => {
       break;
     case "rm":
       await removeFileHandler(args[0]);
+      break;
+    case "os":
+      await osHandler(...(args || ""));
       break;
     case "help":
       console.log("Available commands: up, help, and .exit");
