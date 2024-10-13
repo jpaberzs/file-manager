@@ -7,6 +7,9 @@ export const renameFileHandler = async (...args) => {
   try {
     const [pathToFile, newFileName] = args;
 
+    if (!pathToFile || !newFileName)
+      return console.error("Operation failed: Please check path to file or name of the new file");
+
     const currentDir = resolve(pathToFile);
     const isAccesed = await access(currentDir)
       .then(() => true)

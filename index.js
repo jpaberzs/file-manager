@@ -11,6 +11,7 @@ const initApp = () => {
   const username = getUsername() || "Anonymous";
   const rl = readline.createInterface({ input, output });
 
+  // TODO: Uncomment when done all task
   // process.chdir(homedir());
   process.stdout.write(`Welcome to the File Manager, ${username}! \n`);
   process.stdout.write(styleText("green", `You are currently in ${cwd()} \n`));

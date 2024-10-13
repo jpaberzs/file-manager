@@ -1,9 +1,12 @@
 import { access } from "node:fs/promises";
 import { resolve } from "path";
 
-export const dedicateFolderHandler = async (arg) => {
+export const dedicateFolderHandler = async (...arg) => {
   try {
-    const destination = await resolve(arg);
+    const currentDir = arg.join(" ");
+
+    const destination = await resolve(currentDir);
+    console.log(destination);
 
     const isAccesed = await access(destination)
       .then(() => true)

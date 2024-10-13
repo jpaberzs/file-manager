@@ -3,9 +3,9 @@ import { access, writeFile } from "node:fs/promises";
 import { resolve } from "path";
 import { styleText } from "node:util";
 
-export const addFileHandler = async (arg) => {
+export const addFileHandler = async (...arg) => {
   try {
-    const currentDir = resolve(`${process.cwd()}/${arg}`);
+    const currentDir = resolve(`${process.cwd()}/${arg.join(" ")}`);
     const isAccesed = await access(currentDir)
       .then(() => true)
       .catch(() => false);

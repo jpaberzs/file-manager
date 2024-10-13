@@ -1,9 +1,10 @@
-import { access, readFile, stat } from "node:fs/promises";
+import { createReadStream } from "node:fs";
+import { access, stat } from "node:fs/promises";
 import { resolve } from "path";
 
-export const readFileHandler = async (arg) => {
+export const readFileHandler = async (...arg) => {
   try {
-    const destination = await resolve(arg);
+    const destination = await resolve(arg.join(" "));
 
     const isAccesed = await access(destination)
       .then(() => true)
@@ -13,14 +14,28 @@ export const readFileHandler = async (arg) => {
 
     const detailedInfo = await stat(destination);
 
-    if (detailedInfo.isFile()) {
-      const file = await readFile(destination, "utf-8");
-      console.log(file);
-    } else {
-      console.error("This is a directory!");
-    }
+    const readStream = detailedInfo.isFile()
+      ? createReadStream(destination, { encoding: "utf-8" })
+      : "";
 
-    return;
+    if (!readStream) return console.error("This is a directory!");
+
+    return new Promise((resolve, reject) => {
+      let fileContent = "";
+      readStream.on("data", (chunk) => {
+        fileContent += chunk;
+      });
+
+      readStream.on("end", () => {
+        console.log(fileContent);
+        resolve();
+      });
+
+      readStream.on("error", (error) => {
+        console.error(`Operation failed: ${error.message}`);
+        reject(error);
+      });
+    });
   } catch (error) {
     throw new Error(error);
   }
