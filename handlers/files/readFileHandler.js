@@ -4,7 +4,7 @@ import { resolve } from "path";
 
 export const readFileHandler = async (...arg) => {
   try {
-    const destination = await resolve(arg.join(" "));
+    const destination = resolve(arg.join(" "));
 
     const isAccesed = await access(destination)
       .then(() => true)

@@ -5,7 +5,7 @@ export const dedicateFolderHandler = async (...arg) => {
   try {
     const currentDir = arg.join(" ");
 
-    const destination = await resolve(currentDir);
+    const destination = resolve(currentDir);
     console.log(destination);
 
     const isAccesed = await access(destination)
