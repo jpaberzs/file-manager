@@ -1,6 +1,5 @@
 import { createReadStream, createWriteStream } from "node:fs";
-import { resolve, join, extname } from "path";
-import { writeFile } from "node:fs/promises";
+import { resolve } from "path";
 import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 import { pipeline } from "node:stream/promises";
@@ -17,22 +16,10 @@ export const compress = async (...args) => {
     const resolvedPathToNewFile = resolve(pathToNewFile);
     const isAccesedPathToFile = await getAccessStatus(resolvedPathToFile);
 
-    const extName = extname(resolvedPathToNewFile);
-
     if (!isAccesedPathToFile) return console.error("Operation failed: Please check path directory");
 
-    if (extName) {
-      await writeFile(resolvedPathToNewFile.replace(/(\.[^\/\\]+)$/, ".br"), "");
-    } else {
-      return console.error("Operation failed: Please check path directory");
-    }
-
     const readStream = createReadStream(resolvedPathToFile);
-    const writeStream = createWriteStream(
-      extName
-        ? resolvedPathToNewFile.replace(/(\.[^\/\\]+)$/, ".br")
-        : join(resolvedPathToNewFile, "archive.br"),
-    );
+    const writeStream = createWriteStream(resolvedPathToNewFile + ".br");
     const brotli = zlib.createBrotliCompress();
 
     await pipeline(readStream, brotli, writeStream);

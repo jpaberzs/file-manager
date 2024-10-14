@@ -8,8 +8,10 @@ export const moveFileHandler = async (...args) => {
     return console.error("Operation failed: Please check path to file or path directory");
 
   try {
-    await copyFileHandler(pathToFile, pathToNewDirectory);
-    await removeFileHandler(pathToFile);
+    await copyFileHandler(pathToFile, pathToNewDirectory).catch((err) => {
+      console.error(err.message);
+    });
+    isError ? await removeFileHandler(pathToFile).catch((err) => console.error(err.message)) : "";
   } catch (error) {
     throw new Error(error);
   }

@@ -16,6 +16,12 @@ const initApp = () => {
   process.stdout.write(styleText("green", `You are currently in ${cwd()} \n`));
 
   rl.on("line", async (line) => {
+    if (!line) {
+      console.error("Invalid input. Type 'help' for a list of available commands.");
+      process.stdout.write(styleText("green", `You are currently in ${cwd()} \n`));
+      return;
+    }
+
     const inputArgs = line
       .trim()
       .match(/(?:[^\s'"]+|['"][^'"]*['"])/g)

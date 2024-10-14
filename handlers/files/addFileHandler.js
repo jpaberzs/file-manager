@@ -7,7 +7,7 @@ import { getAccessStatus } from "../../utils/getAccessStatus.js";
 export const addFileHandler = async (arg) => {
   try {
     const currentDir = resolve(`${process.cwd()}/${arg}`);
-    const isAccesed = getAccessStatus(currentDir);
+    const isAccesed = await getAccessStatus(currentDir);
 
     if (isAccesed) return console.error("Operation failed: This file is already exist!");
 

@@ -37,7 +37,7 @@ export const osHandler = async (...args) => {
         console.log("Available commands: --EOL --cpus --homedir --username --architecture");
         break;
       default:
-        console.error(`Invalid argument: ${item}! Type os .help for more information.`);
+        console.error(`Invalid argument: ${item}! Type "os .help" for more information.`);
     }
   });
 };

@@ -1,5 +1,3 @@
-// import { CONSTANTS } from "../constants.js";
-
 import { dedicateFolderHandler, readDirHandler, upDirectoryHandler } from "./navigation/index.js";
 import {
   addFileHandler,
@@ -21,7 +19,7 @@ export const indexHandler = async (line, readline) => {
       await upDirectoryHandler();
       break;
     case "cd":
-      await dedicateFolderHandler(args[0] || "");
+      await dedicateFolderHandler(args[0] || "").catch((err) => console.error(err.message));
       break;
     case "ls":
       await readDirHandler();

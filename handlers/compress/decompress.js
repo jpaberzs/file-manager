@@ -1,6 +1,6 @@
 import { createReadStream, createWriteStream } from "node:fs";
 import { resolve, extname } from "path";
-import { writeFile } from "node:fs/promises";
+import { appendFile } from "node:fs/promises";
 import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 import { pipeline } from "node:stream/promises";
@@ -17,17 +17,14 @@ export const decompress = async (...args) => {
     const resolvedPathToNewFile = resolve(pathToNewFile);
 
     const isAccesedPathToArchive = await getAccessStatus(resolvedPathToArchive);
-
-    const extName = extname(resolvedPathToNewFile);
+    const isAccesedPathToNewFile = await getAccessStatus(resolvedPathToNewFile);
 
     if (!isAccesedPathToArchive)
       return console.error("Operation failed: Please check path directory");
 
-    if (extName) {
-      await writeFile(resolvedPathToNewFile, "");
-    } else {
-      return console.error("Operation failed: Please check path directory");
-    }
+    console.log(isAccesedPathToNewFile);
+
+    appendFile(resolvedPathToNewFile, "");
 
     const readStream = createReadStream(resolvedPathToArchive);
     const writeStream = createWriteStream(resolvedPathToNewFile);
