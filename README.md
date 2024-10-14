@@ -1,6 +1,8 @@
 ## File manager
 
 - Node.js Version: >=22.9.0
+- Clone the repository: `git clone https://github.com/jpaberzs/file-manager.git`
+- To get final version of project checkout to develop branch `git checkout develop`
 - The programm is started by npm-script `start`
 
 ```bash
