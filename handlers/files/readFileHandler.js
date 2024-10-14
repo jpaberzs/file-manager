@@ -2,9 +2,9 @@ import { createReadStream } from "node:fs";
 import { access, stat } from "node:fs/promises";
 import { resolve } from "path";
 
-export const readFileHandler = async (...arg) => {
+export const readFileHandler = async (arg) => {
   try {
-    const destination = resolve(arg.join(" "));
+    const destination = resolve(arg);
 
     const isAccesed = await access(destination)
       .then(() => true)

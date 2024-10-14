@@ -11,13 +11,17 @@ const initApp = () => {
   const username = getUsername() || "Anonymous";
   const rl = readline.createInterface({ input, output });
 
-  // TODO: Uncomment when done all task
-  // process.chdir(homedir());
+  process.chdir(homedir());
   process.stdout.write(`Welcome to the File Manager, ${username}! \n`);
   process.stdout.write(styleText("green", `You are currently in ${cwd()} \n`));
 
   rl.on("line", async (line) => {
-    await indexHandler(line, rl);
+    const inputArgs = line
+      .trim()
+      .match(/(?:[^\s'"]+|['"][^'"]*['"])/g)
+      .map((arg) => arg.replace(/['"]/g, ""));
+
+    await indexHandler(inputArgs, rl);
 
     process.stdout.write(styleText("green", `You are currently in ${cwd()} \n`));
   });

@@ -14,23 +14,23 @@ import { hashHandler } from "./hash/index.js";
 import { compress, decompress } from "./compress/index.js";
 
 export const indexHandler = async (line, readline) => {
-  const [command, ...args] = line.trim().split(/\s+/g);
+  const [command, ...args] = line;
 
   switch (command) {
     case "up":
       await upDirectoryHandler();
       break;
     case "cd":
-      await dedicateFolderHandler(...(args || ""));
+      await dedicateFolderHandler(args[0] || "");
       break;
     case "ls":
       await readDirHandler();
       break;
     case "cat":
-      await readFileHandler(...(args || ""));
+      await readFileHandler(args[0] || "");
       break;
     case "add":
-      await addFileHandler(...(args || ""));
+      await addFileHandler(args[0] || "");
       break;
     case "rn":
       await renameFileHandler(...(args || ""));
@@ -57,7 +57,9 @@ export const indexHandler = async (line, readline) => {
       await decompress(...(args || ""));
       break;
     case "help":
-      console.log("Available commands: up, help, and .exit");
+      console.log(
+        "Available commands: up,cd, ls, cat, add, rn, cp, mv, rm, os, hash, compress, decompress, help, .exit",
+      );
       break;
     case ".exit":
       readline.close();
