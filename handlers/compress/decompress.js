@@ -17,14 +17,10 @@ export const decompress = async (...args) => {
     const resolvedPathToNewFile = resolve(pathToNewFile);
 
     const isAccesedPathToArchive = await getAccessStatus(resolvedPathToArchive);
-    const isAccesedPathToNewFile = await getAccessStatus(resolvedPathToNewFile);
+    // const isAccesedPathToNewFile = await getAccessStatus(resolvedPathToNewFile);
 
     if (!isAccesedPathToArchive)
       return console.error("Operation failed: Please check path directory");
-
-    console.log(isAccesedPathToNewFile);
-
-    appendFile(resolvedPathToNewFile, "");
 
     const readStream = createReadStream(resolvedPathToArchive);
     const writeStream = createWriteStream(resolvedPathToNewFile);

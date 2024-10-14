@@ -52,7 +52,7 @@ export const indexHandler = async (line, readline) => {
       await compress(...(args || ""));
       break;
     case "decompress":
-      await decompress(...(args || ""));
+      await decompress(...(args || "")).catch((err) => console.error(err.message));
       break;
     case "help":
       console.log(
