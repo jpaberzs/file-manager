@@ -7,14 +7,14 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "start": "node index.js --username=jpaberzs"
+    "start": "node index.js -- --username=jpaberzs"
   },
   "author": "Janis Paberzs",
   "license": "ISC",
   "description": "",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/jpaberzs/file-manager/tree/main"
   },
   "keywords": [
     "nodejs",
