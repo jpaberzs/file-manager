@@ -1,14 +1,13 @@
 import { createReadStream } from "node:fs";
-import { access, stat } from "node:fs/promises";
+import { stat } from "node:fs/promises";
 import { resolve } from "path";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 export const readFileHandler = async (arg) => {
   try {
     const destination = resolve(arg);
 
-    const isAccesed = await access(destination)
-      .then(() => true)
-      .catch(() => false);
+    const isAccesed = await getAccessStatus(destination);
 
     if (!isAccesed) return console.error("Operation failed: Please check path directory");
 

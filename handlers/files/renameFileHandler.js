@@ -1,5 +1,6 @@
-import { access, rename } from "node:fs/promises";
+import { rename } from "node:fs/promises";
 import { resolve } from "path";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 import { styleText } from "node:util";
 
@@ -11,9 +12,7 @@ export const renameFileHandler = async (...args) => {
       return console.error("Operation failed: Please check path to file or name of the new file");
 
     const currentDir = resolve(pathToFile);
-    const isAccesed = await access(currentDir)
-      .then(() => true)
-      .catch(() => false);
+    const isAccesed = await getAccessStatus(currentDir);
 
     if (!isAccesed) return console.error("Operation failed: Please check path directory");
 

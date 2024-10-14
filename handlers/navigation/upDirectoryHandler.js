@@ -1,13 +1,11 @@
 import { join } from "path";
-import { access } from "node:fs/promises";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 export const upDirectoryHandler = async () => {
   const currDir = process.cwd();
   const parentDir = join(currDir, "..");
 
-  const isAccesed = await access(parentDir)
-    .then(() => true)
-    .catch(() => false);
+  const isAccesed = await getAccessStatus(parentDir);
 
   try {
     if (isAccesed && currDir !== parentDir) {

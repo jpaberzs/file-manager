@@ -1,11 +1,10 @@
-import { readdir, access, stat } from "node:fs/promises";
+import { readdir, stat } from "node:fs/promises";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 export const readDirHandler = async () => {
   try {
     const currentDir = process.cwd();
-    const isAccesed = await access(currentDir)
-      .then(() => true)
-      .catch(() => false);
+    const isAccesed = await getAccessStatus(currentDir);
 
     if (!isAccesed) return console.error("Operation failed: Please check path directory");
 

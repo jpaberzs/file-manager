@@ -1,14 +1,12 @@
-import { access } from "node:fs/promises";
 import { resolve } from "path";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 export const dedicateFolderHandler = async (arg) => {
   try {
     const destination = resolve(arg);
     console.log(destination);
 
-    const isAccesed = await access(destination)
-      .then(() => true)
-      .catch(() => false);
+    const isAccesed = await getAccessStatus(destination);
 
     if (isAccesed) return process.chdir(destination);
 

@@ -1,14 +1,13 @@
 import { resolve } from "path";
-import { access, unlink } from "node:fs/promises";
+import { unlink } from "node:fs/promises";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 export const removeFileHandler = async (pathToFile) => {
   if (!pathToFile) return console.error("Operation failed: Please check path to file!");
 
   const resolvedPathToFile = resolve(pathToFile);
 
-  const isAccesedPathToFile = await access(resolvedPathToFile)
-    .then(() => true)
-    .catch(() => false);
+  const isAccesedPathToFile = await getAccessStatus(resolvedPathToFile);
 
   if (!isAccesedPathToFile) return console.error("Operation failed: Please check path directory");
 

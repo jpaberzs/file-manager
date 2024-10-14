@@ -1,6 +1,6 @@
 import { createReadStream, createWriteStream } from "node:fs";
-import { access } from "node:fs/promises";
 import { resolve, join, basename } from "path";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 export const copyFileHandler = async (...args) => {
   try {
@@ -12,13 +12,8 @@ export const copyFileHandler = async (...args) => {
     const resolvedPathToFile = resolve(pathToFile);
     const resolvedPathToNewDirectory = resolve(pathToNewDirectory);
 
-    const isAccesedPathToFile = await access(resolvedPathToFile)
-      .then(() => true)
-      .catch(() => false);
-
-    const isAccesedPathToNewDirectory = await access(resolvedPathToNewDirectory)
-      .then(() => true)
-      .catch(() => false);
+    const isAccesedPathToFile = await getAccessStatus(resolvedPathToFile);
+    const isAccesedPathToNewDirectory = await getAccessStatus(resolvedPathToNewDirectory);
 
     if (!isAccesedPathToFile) return console.error("Operation failed: Please check path directory");
     if (!isAccesedPathToNewDirectory)

@@ -1,6 +1,6 @@
 import { createReadStream } from "node:fs";
 import { resolve } from "path";
-import { access } from "node:fs/promises";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 import { createHash } from "node:crypto";
 
 export const hashHandler = async (pathToFile) => {
@@ -8,9 +8,7 @@ export const hashHandler = async (pathToFile) => {
 
   const resolvedPathToFile = resolve(pathToFile);
 
-  const isAccesedPathToFile = await access(resolvedPathToFile)
-    .then(() => true)
-    .catch(() => false);
+  const isAccesedPathToFile = await getAccessStatus(resolvedPathToFile);
 
   if (!isAccesedPathToFile) return console.error("Operation failed: Please check path directory");
 

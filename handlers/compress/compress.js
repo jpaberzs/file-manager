@@ -1,6 +1,7 @@
 import { createReadStream, createWriteStream } from "node:fs";
-import { resolve, join, basename, extname } from "path";
-import { access, writeFile, stat } from "node:fs/promises";
+import { resolve, join, extname } from "path";
+import { writeFile } from "node:fs/promises";
+import { getAccessStatus } from "../../utils/getAccessStatus.js";
 
 import { pipeline } from "node:stream/promises";
 import zlib from "zlib";
@@ -14,9 +15,7 @@ export const compress = async (...args) => {
 
     const resolvedPathToFile = resolve(pathToFile);
     const resolvedPathToNewFile = resolve(pathToNewFile);
-    const isAccesedPathToFile = await access(resolvedPathToFile)
-      .then(() => true)
-      .catch(() => false);
+    const isAccesedPathToFile = await getAccessStatus(resolvedPathToFile);
 
     const extName = extname(resolvedPathToNewFile);
 
