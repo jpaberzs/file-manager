@@ -11,6 +11,7 @@ import {
 } from "./files/index.js";
 import { osHandler } from "./os/index.js";
 import { hashHandler } from "./hash/index.js";
+import { compress, decompress } from "./compress/index.js";
 
 export const indexHandler = async (line, readline) => {
   const [command, ...args] = line.trim().split(/\s+/g);
@@ -48,6 +49,12 @@ export const indexHandler = async (line, readline) => {
       break;
     case "hash":
       await hashHandler(args[0]);
+      break;
+    case "compress":
+      await compress(...(args || ""));
+      break;
+    case "decompress":
+      await decompress(...(args || ""));
       break;
     case "help":
       console.log("Available commands: up, help, and .exit");
