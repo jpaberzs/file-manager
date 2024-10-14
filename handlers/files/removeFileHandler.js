@@ -4,8 +4,6 @@ import { access, unlink } from "node:fs/promises";
 export const removeFileHandler = async (pathToFile) => {
   if (!pathToFile) return console.error("Operation failed: Please check path to file!");
 
-  console.log(pathToFile);
-
   const resolvedPathToFile = resolve(pathToFile);
 
   const isAccesedPathToFile = await access(resolvedPathToFile)
